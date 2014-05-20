@@ -34,16 +34,15 @@ namespace AssemblyInfoUpdater
             // Validate params
             if (args.Length == 0)
             {
-                LogWithoutTimestamp("Error: The first parameter must be the solution file path!");
+                LogWithoutTimestamp("Error: The first parameter must be the folder path!");
                 LogWithoutTimestamp("");
                 PrintHelp();
                 return;
             }
 
-            // Make sure the solution file exists
-            if (!File.Exists(args[0]))
+            if (!Directory.Exists(args[0]))
             {
-                LogWithoutTimestamp("Error: The solution file doesn't exist (" + args[0] + ")");
+                LogWithoutTimestamp("Error: The folder path doesn't exist (" + args[0] + ")");
                 LogWithoutTimestamp("");
                 PrintHelp();
                 return;
@@ -142,7 +141,7 @@ namespace AssemblyInfoUpdater
 
             // Rewrite the file
             using (var textWriter = new StreamWriter(filePath))
-                foreach (string line in lines)
+                foreach (string line in newLines)
                     textWriter.WriteLine(line);
         }
     }
